@@ -7,7 +7,6 @@ import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ListComponent } from './list/list.component';
-import { AlertModule } from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -19,8 +18,7 @@ import { AlertModule } from 'ngx-bootstrap';
     BrowserModule,
     HttpClientModule,
     ApolloModule,
-    HttpLinkModule,
-    AlertModule.forRoot()
+    HttpLinkModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -32,7 +30,9 @@ export class AppModule {
   ) {
     apollo.create({
       link: httpLink.create({ uri: 'https://zqq6nk0x6x.sse.codesandbox.io' }),
-      cache: new InMemoryCache()
+      cache: new InMemoryCache({
+        addTypename: false
+      })
     });
   }
 }
